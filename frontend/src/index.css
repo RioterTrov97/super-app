@@ -1,6 +1,7 @@
 body {
 	margin: 0;
-	font-family: 'Poppins', sans-serif;
+	background: rgb(243, 250, 255);
+	font-family: 'Nunito', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

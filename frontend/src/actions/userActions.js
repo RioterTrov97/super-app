@@ -6,7 +6,7 @@ import {
 } from '../constants/userConstants';
 import { logout } from './adminActions';
 
-export const listPartners = () => async (dispatch, getState) => {
+export const listUsers = () => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: USER_LIST_REQUEST,

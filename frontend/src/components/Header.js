@@ -1,10 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { logout } from '../actions/adminActions';
 import '../styles/Header.scss';
 
 const Header = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const logoutHandler = () => {
 		dispatch(logout());
@@ -13,12 +15,11 @@ const Header = () => {
 	return (
 		<header className="header__container">
 			<div className="header__main">
-				<div className="header__left">
+				<div className="header__left" onClick={() => history.push('/')}>
 					<i className="fab fa-speakap"></i> Super App Support
 				</div>
 				<div className="header__right" onClick={logoutHandler}>
-					<i className="fab fa-sign-out-alt"></i>
-					<p>Logout</p>
+					Logout
 				</div>
 			</div>
 		</header>

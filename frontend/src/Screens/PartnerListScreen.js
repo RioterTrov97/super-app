@@ -4,23 +4,23 @@ import { useHistory } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Message from '../components/InlineMessage';
 import '../styles/adminListScreen.scss';
-import { listAdmins } from '../actions/adminActions';
+import { listPartners } from '../actions/partnerActions';
 
-const AdminList = () => {
+const PartnerListScreen = () => {
 	const history = useHistory();
 
 	const dispatch = useDispatch();
-	const adminLogin = useSelector((state) => state.adminLogin);
-	const { adminInfo } = adminLogin;
-	const adminList = useSelector((state) => state.adminList);
-	const { loading, error, admins } = adminList;
+	const partnerList = useSelector((state) => state.partnerList);
+	const { loading, error, partners } = partnerList;
+
+	console.log(partners);
 
 	useEffect(() => {
 		if (!localStorage.getItem('adminInfo')) {
 			history.push('/login');
 			return;
 		}
-		dispatch(listAdmins());
+		dispatch(listPartners());
 	}, [dispatch, history]);
 
 	return (
@@ -29,14 +29,8 @@ const AdminList = () => {
 				<i
 					className="fas fa-arrow-circle-left"
 					onClick={() => history.push('/')}></i>
-				<p className="adminListScreen__title">Admin List</p>
-				{adminInfo?.isSuperAdmin ? (
-					<button className="adminListScreen__titleButton">
-						Create New Admin
-					</button>
-				) : null}
+				<p className="adminListScreen__title">Partner List</p>
 			</div>
-
 			{error ? <Message message={error} color="red" /> : null}
 			{loading ? (
 				<LoadingSpinner />
@@ -47,27 +41,15 @@ const AdminList = () => {
 							<th>Id</th>
 							<th>Name</th>
 							<th>Phone Number</th>
-							<th>SuperAdmin</th>
 							<th>Details</th>
 						</tr>
 					</thead>
 					<tbody>
-						{admins?.map((admin) => (
-							<tr key={admin?._id}>
-								<td>{admin?._id}</td>
-								<td>{admin?.name}</td>
-								<td>{admin?.phoneNumber}</td>
-								<td>
-									{admin?.isSuperAdmin ? (
-										<i
-											className="fas fa-check"
-											style={{ color: 'green' }}></i>
-									) : (
-										<i
-											className="fas fa-times"
-											style={{ color: 'red' }}></i>
-									)}
-								</td>
+						{partners?.map((partner) => (
+							<tr key={partner?._id}>
+								<td>{partner?._id}</td>
+								<td>{partner?.name}</td>
+								<td>{partner?.phoneNumber}</td>
 								<td className="adminListScreen__AdminLink">
 									Call
 								</td>
@@ -80,4 +62,4 @@ const AdminList = () => {
 	);
 };
 
-export default AdminList;
+export default PartnerListScreen;

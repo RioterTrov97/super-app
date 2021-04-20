@@ -28,35 +28,27 @@ const LoginScreen = () => {
 
 	return (
 		<div className="loginScreen">
-			<div className="loginScreen__main">
-				<h1 className="loginScreen__title">Login</h1>
-				{error ? <InlineMessage message={error} color="red" /> : null}
-				<label htmlFor="loginPhone">Phone Number</label>
-				<input
-					id="loginPhone"
-					type="tel"
-					disabled={loading}
-					placeholder="Enter phone number"
-					onChange={(e) => setPhone(e.target.value)}
-				/>
-				<label htmlFor="loginPassword">Password</label>
-				<input
-					id="loginPassword"
-					type="text"
-					disabled={loading}
-					placeholder="Enter strong password"
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<button
-					type="submit"
-					onClick={submitHandler}
-					disabled={loading}>
-					{loading ? <InlineSpinner /> : 'SIGN IN'}
-				</button>
-				<p>
-					New Customer? <span>Register</span>
-				</p>
-			</div>
+			<h1 className="loginScreen__title">Login</h1>
+			{error ? <InlineMessage message={error} color="red" /> : null}
+			<label htmlFor="loginPhone">Phone Number</label>
+			<input
+				id="loginPhone"
+				type="tel"
+				disabled={loading}
+				placeholder="Enter phone number"
+				onChange={(e) => setPhone(e.target.value)}
+			/>
+			<label htmlFor="loginPassword">Password</label>
+			<input
+				id="loginPassword"
+				type="text"
+				disabled={loading}
+				placeholder="Enter strong password"
+				onChange={(e) => setPassword(e.target.value)}
+			/>
+			<button type="submit" onClick={submitHandler} disabled={loading}>
+				{loading ? <InlineSpinner /> : 'SIGN IN'}
+			</button>
 		</div>
 	);
 };

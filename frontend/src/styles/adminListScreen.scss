@@ -1,40 +1,52 @@
 .adminListScreen {
-	width: 100%;
-	max-width: 100vw;
-	min-height: calc(100vh - 530px);
+	min-width: 800px;
+	max-width: 1200px;
 	display: flex;
-	justify-content: center;
-	margin-top: 100px;
+	flex-direction: column;
+	background: white;
+	padding: 40px;
+	border-radius: 25px;
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
 	&__titleBar {
 		display: flex;
-		margin-bottom: 20px;
+		align-items: center;
+		height: 40px;
+		margin-bottom: 30px;
+
+		> i {
+			margin-right: 10px;
+			font-size: 1.3rem;
+			color: rgb(230, 46, 0);
+			cursor: pointer;
+		}
+
+		> i:hover {
+			color: rgb(230, 104, 0);
+		}
 	}
 
 	&__title {
-		color: rgb(48, 48, 48);
+		color: rgb(230, 46, 0);
+		font-weight: 700;
+		font-size: 1.5rem;
 	}
 
 	&__titleButton {
 		margin-left: auto;
+		cursor: pointer;
 		outline: none;
 		border: none;
-		background: rgb(0, 112, 177);
+		background: rgb(211, 42, 0);
 		color: white;
 		font-weight: 600;
 		padding: 0.75em 1em;
+		height: 45px;
 		border-radius: 25px;
 		transition: background 350ms ease-out;
 	}
 	&__titleButton:hover {
-		background: rgb(77, 0, 177);
-	}
-
-	&__main {
-		min-width: 500px;
-		max-width: 1400px;
-		display: flex;
-		flex-direction: column;
+		background: rgb(201, 114, 0);
 	}
 
 	&__table {
@@ -52,39 +64,39 @@
 	}
 
 	&__table > thead {
-		background: rgb(0, 112, 177);
+		background: rgb(211, 42, 0);
 		color: white;
 	}
 
 	&__table > tbody > tr:nth-child(even) {
-		background-color: #f2f2f2;
+		background-color: rgb(238, 238, 238);
 		border-radius: 5px;
 	}
 
-	&__tableId {
+	&__Id {
 		cursor: pointer;
 	}
 
-	&__tableId:hover {
+	&__Id:hover {
 		color: rgb(0, 112, 177);
 	}
 
-	&__tableAdminLink {
+	&__AdminLink {
 		cursor: pointer;
-		color: rgb(0, 113, 219);
+		color: rgb(211, 42, 0);
 		font-weight: 600;
 		background: none;
 		background: linear-gradient(
 				to left,
 				transparent 50%,
-				rgb(0, 113, 219) 50%
+				rgb(0, 173, 29) 50%
 			)
 			right;
 		background-size: 200%;
 		transition: 350ms ease-out;
 	}
 
-	&__tableAdminLink:hover {
+	&__AdminLink:hover {
 		background-position: left;
 		color: white;
 	}
