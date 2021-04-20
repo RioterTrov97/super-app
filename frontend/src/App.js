@@ -7,6 +7,7 @@ import HomeScreen from './Screens/HomeScreen';
 import { verifyAdmin } from './actions/adminActions';
 import LoadingSpinner from './components/LoadingSpinner';
 import AdminList from './Screens/AdminListScreen';
+import Header from './components/Header';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
 
 	return (
 		<Router>
+			<Header />
 			<main>
 				{!loading ? (
 					<>

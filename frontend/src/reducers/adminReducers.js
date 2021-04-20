@@ -24,7 +24,7 @@ export const adminLoginReducer = (state = {}, action) => {
 	}
 };
 
-export const adminListReducer = (state = { users: [] }, action) => {
+export const adminListReducer = (state = { admins: [] }, action) => {
 	switch (action.type) {
 		case ADMIN_LIST_REQUEST:
 			return { loading: true };
@@ -33,7 +33,7 @@ export const adminListReducer = (state = { users: [] }, action) => {
 		case ADMIN_LIST_FAIL:
 			return { loading: false, error: action.payload };
 		case ADMIN_LIST_RESET:
-			return { users: [] };
+			return { admins: [] };
 		default:
 			return state;
 	}

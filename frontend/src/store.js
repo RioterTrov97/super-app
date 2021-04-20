@@ -2,10 +2,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { adminListReducer, adminLoginReducer } from './reducers/adminReducers';
+import { userListReducer } from './reducers/userReducers';
+import { partnerListReducer } from './reducers/partnerReducers';
 
 const reducer = combineReducers({
 	adminLogin: adminLoginReducer,
 	adminList: adminListReducer,
+	partnerList: partnerListReducer,
+	userList: userListReducer,
 });
 
 const initialState = {};

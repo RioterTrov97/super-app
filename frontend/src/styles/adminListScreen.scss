@@ -6,8 +6,28 @@
 	justify-content: center;
 	margin-top: 100px;
 
+	&__titleBar {
+		display: flex;
+		margin-bottom: 20px;
+	}
+
 	&__title {
 		color: rgb(48, 48, 48);
+	}
+
+	&__titleButton {
+		margin-left: auto;
+		outline: none;
+		border: none;
+		background: rgb(0, 112, 177);
+		color: white;
+		font-weight: 600;
+		padding: 0.75em 1em;
+		border-radius: 25px;
+		transition: background 350ms ease-out;
+	}
+	&__titleButton:hover {
+		background: rgb(77, 0, 177);
 	}
 
 	&__main {
@@ -38,6 +58,7 @@
 
 	&__table > tbody > tr:nth-child(even) {
 		background-color: #f2f2f2;
+		border-radius: 5px;
 	}
 
 	&__tableId {

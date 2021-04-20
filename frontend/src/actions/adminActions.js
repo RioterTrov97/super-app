@@ -15,6 +15,8 @@ import {
 	ADMIN_LIST_REQUEST,
 	ADMIN_LIST_RESET,
 } from '../constants/adminConstants';
+import { PARTNER_LIST_RESET } from '../constants/partnerConstants';
+import { USER_LIST_RESET } from '../constants/userConstants';
 
 export const login = (phoneNumber, password) => async (dispatch) => {
 	try {
@@ -62,6 +64,8 @@ export const logout = () => (dispatch) => {
 	localStorage.removeItem('adminInfo');
 	dispatch({ type: ADMIN_LOGOUT });
 	dispatch({ type: ADMIN_LIST_RESET });
+	dispatch({ type: PARTNER_LIST_RESET });
+	dispatch({ type: USER_LIST_RESET });
 	document.location.href = '/login';
 };
 

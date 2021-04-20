@@ -4,37 +4,29 @@ import { useHistory } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Message from '../components/InlineMessage';
 import '../styles/adminListScreen.scss';
-import { listAdmins } from '../actions/adminActions';
+import { listPartners } from '../actions/partnerActions';
 
-const AdminList = () => {
+const PartnerList = () => {
 	const history = useHistory();
 
 	const dispatch = useDispatch();
-	const adminLogin = useSelector((state) => state.adminLogin);
-	const { adminInfo } = adminLogin;
-	const adminList = useSelector((state) => state.adminList);
-	const { loading, error, admins } = adminList;
+	const partnerList = useSelector((state) => state.partnerList);
+	const { loading, error, partners } = partnerList;
+
+	console.log(partners);
 
 	useEffect(() => {
 		if (!localStorage.getItem('adminInfo')) {
 			history.push('/login');
 			return;
 		}
-		dispatch(listAdmins());
+		dispatch(listPartners());
 	}, [dispatch, history]);
 
 	return (
 		<div className="adminListScreen">
 			<div className="adminListScreen__main">
-				<div className="adminListScreen__titleBar">
-					<h1 className="adminListScreen__title">Admin List</h1>
-					{adminInfo?.isSuperAdmin ? (
-						<button className="adminListScreen__titleButton">
-							Create New Admin
-						</button>
-					) : null}
-				</div>
-
+				<h1 className="adminListScreen__title">Partner List</h1>
 				{error ? <Message message={error} color="red" /> : null}
 				{loading ? (
 					<LoadingSpinner />
@@ -49,16 +41,22 @@ const AdminList = () => {
 								<th>Details</th>
 							</tr>
 						</thead>
-						<tbody>
-							{admins?.map((admin) => (
-								<tr key={admin?._id}>
-									<td className="AdminListScreen__tableId">
-										{admin?._id}
+						{/* <tbody>
+							{partners?.map((partner) => (
+								<tr key={partner?._id}>
+									<td
+										className="AdminListScreen__tableId"
+										onClick={() =>
+											window.open(
+												`/admin/${partner?._id}`
+											)
+										}>
+										{partner?._id}
 									</td>
-									<td>{admin?.name}</td>
-									<td>{admin?.phoneNumber}</td>
+									<td>{partner?.name}</td>
+									<td>{partner?.phoneNumber}</td>
 									<td>
-										{admin?.isSuperAdmin ? (
+										{partner?.isSuperAdmin ? (
 											<i
 												className="fas fa-check"
 												style={{ color: 'green' }}></i>
@@ -68,12 +66,18 @@ const AdminList = () => {
 												style={{ color: 'red' }}></i>
 										)}
 									</td>
-									<td className="adminListScreen__tableAdminLink">
-										Call
+									<td
+										className="adminListScreen__tableAdminLink"
+										onClick={() =>
+											window.open(
+												`/admin/${partner?._id}`
+											)
+										}>
+										Edit
 									</td>
 								</tr>
 							))}
-						</tbody>
+						</tbody> */}
 					</table>
 				)}
 			</div>
@@ -81,4 +85,4 @@ const AdminList = () => {
 	);
 };
 
-export default AdminList;
+export default PartnerList;
