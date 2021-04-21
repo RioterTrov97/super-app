@@ -45,7 +45,7 @@ const PartnerListScreen = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{partners?.map((partner) => (
+						{partners?.partners?.map((partner) => (
 							<tr key={partner?._id}>
 								<td>{partner?._id}</td>
 								<td>{partner?.name}</td>

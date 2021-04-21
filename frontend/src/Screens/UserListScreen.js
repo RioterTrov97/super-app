@@ -45,7 +45,7 @@ const UserListScreen = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{users?.map((user) => (
+						{users?.users?.map((user) => (
 							<tr key={user?._id}>
 								<td>{user?._id}</td>
 								<td>{user?.name}</td>

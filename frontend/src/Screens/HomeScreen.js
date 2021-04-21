@@ -34,7 +34,7 @@ const HomeScreen = () => {
 				to do today?
 			</h1>
 			<div className="homeScreen__cards">
-				{adminInfo.isSuperAdmin ? (
+				{adminInfo?.isSuperAdmin ? (
 					<HomeCard
 						listPic={adminImg}
 						listTitle="Admin List"
