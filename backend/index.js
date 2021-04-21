@@ -8,10 +8,9 @@ import userRoutes from './routes/userRoutes.js'
 import partnerRoutes from './routes/partnerRoutes.js'
 // import apiroutes from './apiRoute'
 import listRoutes from './routes/listRoutes.js'
+import logRoutes from './routes/logRoutes.js'
 import {notFound, errorHandler} from './middleware/errorMiddleware.js'
 import uploadRoutes from './routes/uploadRoutes.js'
-import fs  from 'fs'
-import csv  from 'fast-csv'
 
 
 
@@ -29,11 +28,14 @@ app.use(express.json())
 
 // app.use('/api', apiroutes)
 
+
+
 app.use('/api/admins', adminRoutes)
 app.use('/api/partners', partnerRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/lists', listRoutes)
 app.use('/api/upload', uploadRoutes)
+app.use('/api/logs', logRoutes)
 
 const __dirname = path.resolve();
 app.use('/upload', express.static(path.join(__dirname, '/uploads')));
