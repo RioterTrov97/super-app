@@ -11,13 +11,13 @@ $colors: rgb(190, 255, 206);
 	}
 
 	&__open > i {
-		margin: 10px 10px 0 auto;
-		height: 20px;
+		margin: 18px 15px 0 auto;
+		font-size: 20px !important;
 		cursor: pointer;
 	}
 
 	&__open > i:hover {
-		color: rgb(24, 24, 24);
+		color: rgb(24, 24, 24) !important;
 	}
 
 	&__hide {
