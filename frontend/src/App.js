@@ -6,12 +6,13 @@ import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import { verifyAdmin } from './actions/adminActions';
 import LoadingSpinner from './components/LoadingSpinner';
-import AdminList from './screens/AdminListScreen';
+import AdminListScreen from './screens/AdminListScreen';
 import Header from './components/Header';
 import './App.css';
 import PartnerListScreen from './screens/PartnerListScreen';
 import UserListScreen from './screens/UserListScreen';
 import CreateAdminScreen from './screens/CreateAdminScreen';
+import csvUploadScreen from './screens/csvUploadScreen';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -34,8 +35,13 @@ const App = () => {
 							<>
 								<Route
 									exact
+									path="/uploadcsv"
+									component={csvUploadScreen}
+								/>
+								<Route
+									exact
 									path="/adminlist"
-									component={AdminList}
+									component={AdminListScreen}
 								/>
 								<Route
 									exact

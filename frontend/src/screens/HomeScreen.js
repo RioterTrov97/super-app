@@ -61,7 +61,7 @@ const HomeScreen = () => {
 					listPic={csvImg}
 					listTitle="Upload CSV"
 					listDesc="This page allows you to upload csv files that has user lists or partner lists or the list with both."
-					listLink="/uploadlist"
+					listLink="/uploadcsv"
 				/>
 			</div>
 		</div>
