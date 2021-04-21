@@ -34,12 +34,14 @@ const HomeScreen = () => {
 				to do today?
 			</h1>
 			<div className="homeScreen__cards">
-				<HomeCard
-					listPic={adminImg}
-					listTitle="Admin List"
-					listDesc="This page has details of all the admins of the site. Only superadmin has edit access to this list."
-					listLink="/adminlist"
-				/>
+				{adminInfo.isSuperAdmin ? (
+					<HomeCard
+						listPic={adminImg}
+						listTitle="Admin List"
+						listDesc="This page has details of all the admins of the site. Only superadmin has edit access to this list."
+						listLink="/adminlist"
+					/>
+				) : null}
 
 				<HomeCard
 					listPic={riderImg}
