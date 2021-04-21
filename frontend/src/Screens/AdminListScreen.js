@@ -5,6 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Message from '../components/InlineMessage';
 import '../styles/adminListScreen.scss';
 import { listAdmins } from '../actions/adminActions';
+import { ADMIN_CREATE_RESET } from '../constants/adminConstants';
 
 const AdminList = () => {
 	const history = useHistory();
@@ -31,7 +32,12 @@ const AdminList = () => {
 					onClick={() => history.push('/')}></i>
 				<p className="adminListScreen__title">Admin List</p>
 				{adminInfo?.isSuperAdmin ? (
-					<button className="adminListScreen__titleButton">
+					<button
+						className="adminListScreen__titleButton"
+						onClick={() => {
+							dispatch({ type: ADMIN_CREATE_RESET });
+							history.push('/createadmin');
+						}}>
 						Create New Admin
 					</button>
 				) : null}
