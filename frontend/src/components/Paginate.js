@@ -4,7 +4,6 @@ import '../styles/paginate.scss';
 
 const Paginate = ({ pages = 1, page = 1, listType }) => {
 	const history = useHistory();
-	console.log(pages, page);
 	return (
 		pages > 1 && (
 			<div className="pagination">
