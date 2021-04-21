@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import { verifyAdmin } from './actions/adminActions';
@@ -16,7 +16,7 @@ import CreateAdminScreen from './screens/CreateAdminScreen';
 const App = () => {
 	const dispatch = useDispatch();
 	const adminLogin = useSelector((state) => state.adminLogin);
-	const { loading } = adminLogin;
+	const { loading, adminInfo } = adminLogin;
 
 	useEffect(() => {
 		if (localStorage.getItem('adminInfo')) {
@@ -30,24 +30,35 @@ const App = () => {
 			<main className="contentContainer">
 				{!loading ? (
 					<>
-						<Route exact path="/adminlist" component={AdminList} />
-						<Route
-							exact
-							path="/createadmin"
-							component={CreateAdminScreen}
-						/>
-						<Route
-							exact
-							path="/partnerlist"
-							component={PartnerListScreen}
-						/>
-						<Route
-							exact
-							path="/userlist"
-							component={UserListScreen}
-						/>
+						{adminInfo ? (
+							<>
+								<Route
+									exact
+									path="/adminlist"
+									component={AdminList}
+								/>
+								<Route
+									exact
+									path="/createadmin"
+									component={CreateAdminScreen}
+								/>
+								<Route
+									exact
+									path="/partnerlist"
+									component={PartnerListScreen}
+								/>
+								<Route
+									exact
+									path="/userlist"
+									component={UserListScreen}
+								/>
+								<Route exact path="/" component={HomeScreen} />
+							</>
+						) : (
+							<Redirect to="/login" />
+						)}
+
 						<Route exact path="/login" component={LoginScreen} />
-						<Route exact path="/" component={HomeScreen} />
 					</>
 				) : (
 					<LoadingSpinner />
