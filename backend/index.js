@@ -23,6 +23,8 @@ const app = express()
 connectDB()
 
 
+
+
 app.use(express.json())
 
 // app.use('/api', apiroutes)
@@ -36,16 +38,8 @@ app.use('/api/upload', uploadRoutes)
 const __dirname = path.resolve();
 app.use('/upload', express.static(path.join(__dirname, '/uploads')));
 
-app.get('/csv', (req,res) => {
 
-    fs.createReadStream(path.resolve(__dirname, 'uploads', 'parse.csv'))
-    .pipe(csv.parse({ headers: true }))
-    .on('error', error => console.error(error))
-    .on('data', row => console.log(row))
-    .on('end', rowCount => console.log(`Parsed ${rowCount} rows`));
-    res.send('CSV parsed')
 
-})
 
 
 

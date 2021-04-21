@@ -22,8 +22,28 @@ const getUserById = asyncHandler(async (req, res) => {
 // @route   GET /api/Users
 // @access  Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
-    const users = await User.find({})
-    res.json(users)
-  })
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 1
+
+  const keyword = req.query.keyword
+    ? {
+      name: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      },
+      phoneNumber: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      }
+      }
+    : {}
+
+  const count = await User.countDocuments({ ...keyword })
+  const partners = await User.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
+  res.json({ partners, page, pages: Math.ceil(count / pageSize) })
+})
 
   export {getUsers,getUserById  }

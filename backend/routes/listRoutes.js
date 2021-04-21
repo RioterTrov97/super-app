@@ -10,8 +10,6 @@ import {
     import { protect, superadmin } from '../middleware/authMiddleware.js'
 
 
-
-
     router.route('/').get(protect, getList)
     router.route('/:id').get(protect,  getListbyid )
     

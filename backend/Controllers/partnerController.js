@@ -7,8 +7,6 @@ import Partner from '../models/PartnerModel.js'
 // @access  Private/Admin
 const getPartnerById = asyncHandler(async (req, res) => {
     const partner = await Partner.findById(req.params.id)
-  
-
     if (partner) {
       res.json(partner)
     } else {
@@ -21,8 +19,28 @@ const getPartnerById = asyncHandler(async (req, res) => {
 // @route   GET /api/orders
 // @access  Private/Admin
 const getPartner = asyncHandler(async (req, res) => {
-    const partners = await Partner.find({})
-    res.json(partners)
-  })
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 1
+
+  const keyword = req.query.keyword
+    ? {
+      name: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      },
+      phoneNumber: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      }
+      }
+    : {}
+
+  const count = await Partner.countDocuments({ ...keyword })
+  const partners = await Partner.find({ ...keyword })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
+  res.json({ partners, page, pages: Math.ceil(count / pageSize) })
+})
 
   export {getPartner,getPartnerById }
