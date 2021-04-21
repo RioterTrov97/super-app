@@ -1,6 +1,7 @@
 .header {
 	&__container {
 		width: 100vw;
+		padding-top: 10px;
 		height: 60px;
 		display: flex;
 		align-items: center;
@@ -17,11 +18,13 @@
 
 	&__left {
 		display: flex;
+		align-items: center;
+		justify-content: center;
 		color: rgb(255, 51, 0);
 		background: none;
-		font-weight: 700;
+		font-weight: 800;
 		cursor: pointer;
-		font-size: 1.3rem;
+		font-size: 1.5rem;
 		padding: 8px 16px;
 		border-radius: 25px;
 		transition: background 250ms, color 250ms ease-out;
@@ -35,9 +38,11 @@
 	&__right {
 		margin-left: auto;
 		display: flex;
-		color: rgb(236, 47, 0);
-		background: none;
-		font-weight: 600;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		background: rgb(216, 67, 29);
+		font-weight: 700;
 		cursor: pointer;
 		font-size: 1.2rem;
 		padding: 8px 16px;
@@ -50,8 +55,11 @@
 		}
 	}
 
-	&__right:hover,
+	&__right:hover {
+		background: rgb(255, 136, 0);
+	}
+
 	&__left:hover {
-		background: rgba(255, 72, 72, 0.2);
+		background: rgba(255, 18, 18, 0.137);
 	}
 }

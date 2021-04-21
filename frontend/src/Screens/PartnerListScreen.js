@@ -5,6 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import Message from '../components/InlineMessage';
 import '../styles/adminListScreen.scss';
 import { listPartners } from '../actions/partnerActions';
+import Paginate from '../components/Paginate';
 
 const PartnerListScreen = () => {
 	const history = useHistory();
@@ -35,28 +36,35 @@ const PartnerListScreen = () => {
 			{loading ? (
 				<LoadingSpinner />
 			) : (
-				<table className="adminListScreen__table">
-					<thead>
-						<tr>
-							<th>Id</th>
-							<th>Name</th>
-							<th>Phone Number</th>
-							<th>Details</th>
-						</tr>
-					</thead>
-					<tbody>
-						{partners?.map((partner) => (
-							<tr key={partner?._id}>
-								<td>{partner?._id}</td>
-								<td>{partner?.name}</td>
-								<td>{partner?.phoneNumber}</td>
-								<td className="adminListScreen__AdminLink">
-									Call
-								</td>
+				<>
+					<table className="adminListScreen__table">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Name</th>
+								<th>Phone Number</th>
+								<th>Details</th>
 							</tr>
-						))}
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							{partners?.partners?.map((partner) => (
+								<tr key={partner?._id}>
+									<td>{partner?._id}</td>
+									<td>{partner?.name}</td>
+									<td>{partner?.phoneNumber}</td>
+									<td className="adminListScreen__AdminLink">
+										Call
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+					<Paginate
+						pages={partners?.pages}
+						page={partners?.page}
+						listType="partnerlist"
+					/>
+				</>
 			)}
 		</div>
 	);

@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import LoginScreen from './Screens/LoginScreen';
-import HomeScreen from './Screens/HomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
 import { verifyAdmin } from './actions/adminActions';
 import LoadingSpinner from './components/LoadingSpinner';
-import AdminList from './Screens/AdminListScreen';
+import AdminList from './screens/AdminListScreen';
 import Header from './components/Header';
 import './App.css';
-import PartnerListScreen from './Screens/PartnerListScreen';
-import UserListScreen from './Screens/UserListScreen';
+import PartnerListScreen from './screens/PartnerListScreen';
+import UserListScreen from './screens/UserListScreen';
+import CreateAdminScreen from './screens/CreateAdminScreen';
 
 const App = () => {
 	const dispatch = useDispatch();
@@ -30,6 +31,11 @@ const App = () => {
 				{!loading ? (
 					<>
 						<Route exact path="/adminlist" component={AdminList} />
+						<Route
+							exact
+							path="/createadmin"
+							component={CreateAdminScreen}
+						/>
 						<Route
 							exact
 							path="/partnerlist"

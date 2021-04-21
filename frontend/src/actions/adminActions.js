@@ -7,13 +7,14 @@ import {
 	ADMIN_LOGIN_REQUEST,
 	ADMIN_LOGIN_SUCCESS,
 	ADMIN_LOGOUT,
-	ADMIN_REGISTER_FAIL,
-	ADMIN_REGISTER_REQUEST,
-	ADMIN_REGISTER_SUCCESS,
+	ADMIN_CREATE_FAIL,
+	ADMIN_CREATE_REQUEST,
+	ADMIN_CREATE_SUCCESS,
 	ADMIN_LIST_FAIL,
 	ADMIN_LIST_SUCCESS,
 	ADMIN_LIST_REQUEST,
 	ADMIN_LIST_RESET,
+	ADMIN_CREATE_RESET,
 } from '../constants/adminConstants';
 import { PARTNER_LIST_RESET } from '../constants/partnerConstants';
 import { USER_LIST_RESET } from '../constants/userConstants';
@@ -63,6 +64,7 @@ export const login = (phoneNumber, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
 	localStorage.removeItem('adminInfo');
 	dispatch({ type: ADMIN_LOGOUT });
+	dispatch({ type: ADMIN_CREATE_RESET });
 	dispatch({ type: ADMIN_LIST_RESET });
 	dispatch({ type: PARTNER_LIST_RESET });
 	dispatch({ type: USER_LIST_RESET });
@@ -106,10 +108,12 @@ export const verifyAdmin = () => async (dispatch) => {
 	}
 };
 
-export const register = (name, phoneNumber, password) => async (dispatch) => {
+export const createAdmin = (name, phoneNumber, password) => async (
+	dispatch
+) => {
 	try {
 		dispatch({
-			type: ADMIN_REGISTER_REQUEST,
+			type: ADMIN_CREATE_REQUEST,
 		});
 
 		const config = {
@@ -125,19 +129,12 @@ export const register = (name, phoneNumber, password) => async (dispatch) => {
 		);
 
 		dispatch({
-			type: ADMIN_REGISTER_SUCCESS,
+			type: ADMIN_CREATE_SUCCESS,
 			payload: data,
 		});
-
-		dispatch({
-			type: ADMIN_LOGIN_SUCCESS,
-			payload: data,
-		});
-
-		localStorage.setItem('adminInfo', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
-			type: ADMIN_REGISTER_FAIL,
+			type: ADMIN_CREATE_FAIL,
 			payload:
 				error.response && error.response.data.message
 					? error.response.data.message
