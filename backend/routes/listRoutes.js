@@ -1,18 +1,11 @@
-import express from 'express'
-const router = express.Router()
+import express from 'express';
+const router = express.Router();
 
+import { getList, getListbyid } from '../controllers/listController.js';
 
-import { 
-    getList,
-    getListbyid
-    } from '../controllers/listController.js'
+import { protect, superadmin } from '../middleware/authMiddleware.js';
 
-    import { protect, superadmin } from '../middleware/authMiddleware.js'
+router.route('/').get(protect, getList);
+router.route('/:id').get(protect, getListbyid);
 
-
-    router.route('/').get(protect, getList)
-    router.route('/:id').get(protect,  getListbyid )
-    
-    export default router
-
-    
+export default router;
