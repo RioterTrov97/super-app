@@ -4,38 +4,38 @@ const listSchema = mongoose.Schema(
   {
     userName: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
  
     userPhoneNumber: {
       type: Number,
-      required: true,
+      required: false,
       trim: true,
     },
-    partnerName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    // partnerName: {
+    //   type: String,
+    //   required: false,
+    //   trim: true,
+    // },
  
-    partnerPhoneNumber: {
-      type: Number,
-      required: true,
-      trim: true,
-    },
+    // partnerPhoneNumber: {
+    //   type: Number,
+    //   required:false,
+    //   trim: true,
+    // },
  
-    activation: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    // activation: {
+    //   type: String,
+    //   required:false,
+    //   trim: true,
+    // },
  
-    activationDate: {
-      type: Date,
-      required: true,
-      trim: true,
-    },
+    // activationDate: {
+    //   type: Date,
+    //   required:false,
+    //   trim: true,
+    // },
   },
   { timestamp: true }
 );

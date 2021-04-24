@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "5eee651f739f8c674fd736ee"
+  },
+  "name": "Margherita",
+  "phoneNumber": "984109"
+  
+},{
+  "_id": {
+    "$oid": "5eee6671a27a66807cf2bea3"
+  },
+  "name": "Marinara"
+ 
+},{
+  "_id": {
+    "$oid": "5eee6692a27a66807cf2bea4"
+  },
+  "name": "Carbonara",
+  "phoneNumber": "984156"
+
+}
+]

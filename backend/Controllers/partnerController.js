@@ -19,8 +19,8 @@ const getPartnerById = asyncHandler(async (req, res) => {
 // @route   GET /api/orders
 // @access  Private/Admin
 const getPartner = asyncHandler(async (req, res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
+  const pageSize = Number(req.query.pageSize) || 20
+  const page = Number(req.query.pageNumber) || 0
 
   const keyword = req.query.keyword
     ? {
@@ -35,10 +35,12 @@ const getPartner = asyncHandler(async (req, res) => {
       }
     : {}
 
+
   const count = await Partner.countDocuments({ ...keyword })
   const partners = await Partner.find({ ...keyword })
+    .skip(pageSize * page)
     .limit(pageSize)
-    .skip(pageSize * (page - 1))
+  
 
   res.json({ partners, page, pages: Math.ceil(count / pageSize) })
 })

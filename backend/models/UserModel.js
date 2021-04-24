@@ -10,7 +10,6 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: true,
         trim: true,
-        unique: true
     },
 
 },{timestamp: true})

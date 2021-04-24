@@ -29,26 +29,26 @@ const mongoPush = asyncHandler(async (row) => {
 // @access  Private
 
 const getList = asyncHandler(async(req,res) => {
-  const pageSize = 10
-  const page = Number(req.query.pageNumber) || 1
+  const pageSize = Number(req.query.pageSize) || 20
+  const page = Number(req.query.pageNumber) || 0
 
   const keyword = req.query.keyword
     ? {
-        name: {
-          $regex: req.query.keyword,
-          $options: 'i',
-        },
-        phoneNumber: {
-          $regex: req.query.keyword,
-          $options: 'i',
-        }
+      name: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      },
+      phoneNumber: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      }
       }
     : {}
 
   const count = await List.countDocuments({ ...keyword })
   const lists = await List.find({ ...keyword })
-    .limit(pageSize)
-    .skip(pageSize * (page - 1))
+  .skip(pageSize * page)
+  .limit(pageSize)
 
   res.json({ lists, page, pages: Math.ceil(count / pageSize) })
 })

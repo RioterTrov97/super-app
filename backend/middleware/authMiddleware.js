@@ -19,7 +19,15 @@ const protect = asyncHandler(async (req, res, next) => {
 
             req.admin= await Admin.findById(decoded.id).select('-password')
 
-            next()
+            if(req.admin.isActive) {
+                next()
+            } else {
+                console.error(error)
+                res.status(403)
+                throw new Error('Account not active.')
+
+            }
+
 
         } catch (error) {
 
