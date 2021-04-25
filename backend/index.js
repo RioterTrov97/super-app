@@ -6,11 +6,11 @@ import dotenv from 'dotenv';
 import adminRoutes from './routes/adminRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import partnerRoutes from './routes/partnerRoutes.js';
-// import apiroutes from './apiRoute'
 import listRoutes from './routes/listRoutes.js';
 import logRoutes from './routes/logRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -18,11 +18,10 @@ const app = express();
 
 connectDB();
 
+//Setup cross origin
+app.use(cors());
+
 app.use(express.json());
-
-// app.use('/api', apiroutes)
-
-let PORT = process.env.PORT || 4000;
 
 app.use('/api/admins', adminRoutes);
 app.use('/api/partners', partnerRoutes);
@@ -38,16 +37,9 @@ app.use('*', (req, res, next) => {
 });
 
 const __dirname = path.resolve();
-app.use(
-	'/upload',
-	express.static(path.join(__dirname, '/supersupport-node/uploads'))
-);
+app.use('/upload', express.static(path.join(__dirname, 'uploads')));
 
 app.use(notFound);
 app.use(errorHandler);
-
-app.listen(PORT, () => {
-	console.log(`listening on port ${PORT}`);
-});
 
 export default app;

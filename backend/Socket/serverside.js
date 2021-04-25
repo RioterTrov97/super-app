@@ -37,7 +37,6 @@ io.on('connection', (socket) => {
 		const partner = await Partner.findOne({ phoneNumber });
 		const list = await List.findOne({ userPhoneNumber });
 		const user = await Admin.findOne({ _id: socket.adminId });
-
 		socket.to(adminId).emit('call', data);
 	});
 });

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
@@ -13,8 +13,11 @@ import PartnerListScreen from './screens/PartnerListScreen';
 import UserListScreen from './screens/UserListScreen';
 import CreateAdminScreen from './screens/CreateAdminScreen';
 import csvUploadScreen from './screens/csvUploadScreen';
+import { io } from 'socket.io-client';
 
 const App = () => {
+	const [socket, setSocket] = useState(null);
+
 	const dispatch = useDispatch();
 	const adminLogin = useSelector((state) => state.adminLogin);
 	const { loading, adminInfo } = adminLogin;
@@ -24,6 +27,34 @@ const App = () => {
 			dispatch(verifyAdmin());
 		}
 	}, [dispatch]);
+
+	const setupSocket = () => {
+		const token = adminInfo?.token;
+		console.log('token', token);
+		if (token && !socket) {
+			const newSocket = io.connect('/', {
+				query: {
+					token: adminInfo?.token,
+				},
+			});
+
+			newSocket.on('disconnect', () => {
+				setSocket(null);
+				setTimeout(setupSocket, 6000);
+			});
+
+			newSocket.on('connect', () => {
+				console.log('Success: Socket Connected!');
+			});
+
+			setSocket(newSocket);
+		}
+	};
+
+	useEffect(() => {
+		setupSocket();
+		// eslint-disable-next-line
+	}, [adminLogin]);
 
 	return (
 		<Router>
@@ -51,12 +82,22 @@ const App = () => {
 								<Route
 									exact
 									path="/partnerlist"
-									component={PartnerListScreen}
+									render={() => (
+										<PartnerListScreen
+											setupSoc={setupSocket}
+											socket={socket}
+										/>
+									)}
 								/>
 								<Route
 									exact
 									path="/userlist"
-									component={UserListScreen}
+									render={() => (
+										<UserListScreen
+											setupSoc={setupSocket}
+											socket={socket}
+										/>
+									)}
 								/>
 								<Route exact path="/" component={HomeScreen} />
 							</>
