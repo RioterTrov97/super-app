@@ -6,6 +6,7 @@ import HomeCard from '../components/HomeCard';
 import adminImg from '../images/admin.png';
 import riderImg from '../images/rider.png';
 import userImg from '../images/users.png';
+import listImg from '../images/list.png';
 import csvImg from '../images/csv.png';
 
 import '../styles/homeScreen.scss';
@@ -55,6 +56,13 @@ const HomeScreen = () => {
 					listTitle="User List"
 					listDesc="This page has details of all the users of the site. Please follow company policy for any actions."
 					listLink="/userlist"
+				/>
+
+				<HomeCard
+					listPic={listImg}
+					listTitle="User & Partner List"
+					listDesc="This page has list of partners and users of the site. Please follow company policy for any actions."
+					listLink="/list"
 				/>
 
 				<HomeCard

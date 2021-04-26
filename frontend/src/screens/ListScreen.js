@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -7,14 +7,31 @@ import '../styles/adminListScreen.scss';
 import { list } from '../actions/listActions';
 import Paginate from '../components/Paginate';
 
-const ListScreen = () => {
+const ListScreen = ({ socket, setupSoc }) => {
+	const [settingSoc, setSettingSoc] = useState(false);
 	const history = useHistory();
 
 	const dispatch = useDispatch();
+
 	const List = useSelector((state) => state.List);
 	const { loading, error, lists } = List;
 
 	console.log(lists);
+
+	useEffect(() => {
+		if (socket) {
+			console.log('socket is here');
+			socket.on('newCall', (data) => {
+				console.log(`Call Started for List: ${data}`);
+			});
+		} else {
+			console.log('setting up socket again');
+			setSettingSoc(!settingSoc);
+			setupSoc();
+		}
+
+		// eslint-disable-next-line
+	}, [settingSoc]);
 
 	useEffect(() => {
 		if (!localStorage.getItem('adminInfo')) {
@@ -23,6 +40,15 @@ const ListScreen = () => {
 		}
 		dispatch(list());
 	}, [dispatch, history]);
+
+	const sendCallData = (e, phoneNumber) => {
+		e.preventDefault();
+		if (socket) {
+			socket.emit('call', phoneNumber);
+		} else {
+			console.log('no socket');
+		}
+	};
 
 	return (
 		<div className="adminListScreen">
@@ -50,9 +76,16 @@ const ListScreen = () => {
 							{lists?.lists?.map((list) => (
 								<tr key={list?._id}>
 									<td>{list?._id}</td>
-									<td>{list?.name}</td>
-									<td>{list?.phoneNumber}</td>
-									<td className="adminListScreen__AdminLink">
+									<td>{list?.userName}</td>
+									<td>{list?.userPhoneNumber}</td>
+									<td
+										className="adminListScreen__AdminLink"
+										onClick={(e) =>
+											sendCallData(
+												e,
+												list?.userPhoneNumber
+											)
+										}>
 										Call
 									</td>
 								</tr>

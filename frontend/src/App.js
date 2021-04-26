@@ -14,6 +14,7 @@ import UserListScreen from './screens/UserListScreen';
 import CreateAdminScreen from './screens/CreateAdminScreen';
 import csvUploadScreen from './screens/csvUploadScreen';
 import { io } from 'socket.io-client';
+import ListScreen from './screens/ListScreen';
 
 const App = () => {
 	const [socket, setSocket] = useState(null);
@@ -93,6 +94,16 @@ const App = () => {
 									path="/userlist"
 									render={() => (
 										<UserListScreen
+											setupSoc={setupSocket}
+											socket={socket}
+										/>
+									)}
+								/>
+								<Route
+									exact
+									path="/list"
+									render={() => (
+										<ListScreen
 											setupSoc={setupSocket}
 											socket={socket}
 										/>
