@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -7,8 +7,9 @@ import '../styles/adminListScreen.scss';
 import { listUsers } from '../actions/userActions';
 import Paginate from '../components/Paginate';
 
-const UserListScreen = () => {
+const UserListScreen = ({ socket, setupSoc }) => {
 	const history = useHistory();
+	const [settingSoc, setSettingSoc] = useState(false);
 
 	const dispatch = useDispatch();
 	const userList = useSelector((state) => state.userList);
@@ -17,12 +18,36 @@ const UserListScreen = () => {
 	console.log(users);
 
 	useEffect(() => {
+		if (socket) {
+			console.log('socket is here');
+			socket.on('newCall', (data) => {
+				console.log(`Call Started for User: ${data}`);
+			});
+		} else {
+			console.log('setting up socket again');
+			setSettingSoc(!settingSoc);
+			setupSoc();
+		}
+
+		// eslint-disable-next-line
+	}, [settingSoc]);
+
+	useEffect(() => {
 		if (!localStorage.getItem('adminInfo')) {
 			history.push('/login');
 			return;
 		}
 		dispatch(listUsers());
 	}, [dispatch, history]);
+
+	const sendCallData = (e, phoneNumber) => {
+		e.preventDefault();
+		if (socket) {
+			socket.emit('call', phoneNumber);
+		} else {
+			console.log('no socket');
+		}
+	};
 
 	return (
 		<div className="adminListScreen">
@@ -52,7 +77,11 @@ const UserListScreen = () => {
 									<td>{user?._id}</td>
 									<td>{user?.name}</td>
 									<td>{user?.phoneNumber}</td>
-									<td className="adminListScreen__AdminLink">
+									<td
+										className="adminListScreen__AdminLink"
+										onClick={(e) =>
+											sendCallData(e, user?.phoneNumber)
+										}>
 										Call
 									</td>
 								</tr>
