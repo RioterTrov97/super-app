@@ -11,11 +11,15 @@ import logRoutes from './routes/logRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import cors from 'cors';
+// import{init,getIO} from './Socket/server.js'
+import { createServer } from 'http';
+
 
 dotenv.config();
 
 const app = express();
-
+// init(httpServer)
+// getIO()
 connectDB();
 
 //Setup cross origin
@@ -37,9 +41,23 @@ app.use('*', (req, res, next) => {
 });
 
 const __dirname = path.resolve();
-app.use('/upload', express.static(path.join(__dirname, 'uploads')));
+app.use('/upload', express.static(path.join(__dirname, 'supersupport-node/uploads')));
 
 app.use(notFound);
 app.use(errorHandler);
+
+
+
+
+const PORT = process.env.PORT || 4000;
+
+
+const httpServer = createServer(app);
+
+app.listen(PORT, () => {
+	console.log(`listening on port ${PORT}`);
+});
+
+
 
 export default app;
