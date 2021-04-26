@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -7,37 +7,14 @@ import '../styles/adminListScreen.scss';
 import { listUsers } from '../actions/userActions';
 import Paginate from '../components/Paginate';
 
-const UserListScreen = ({ socket, setupSoc }) => {
+const UserListScreen = () => {
 	const history = useHistory();
-	const [settingSoc, setSettingSoc] = useState(false);
 
 	const dispatch = useDispatch();
 	const userList = useSelector((state) => state.userList);
 	const { loading, error, users } = userList;
 
 	console.log(users);
-
-	useEffect(() => {
-		console.log('hey');
-		if (socket) {
-			console.log('socket is here');
-			socket.emit('joinCallRoom', 9841414141);
-
-			socket.on('newCall', (data) => {
-				console.log(`Call Started for: ${data}`);
-			});
-
-			return () => {
-				socket.emit('leaveCallRoom', 9841414141);
-			};
-		} else {
-			console.log('setting up socket again');
-			setSettingSoc(!settingSoc);
-			setupSoc();
-		}
-
-		// eslint-disable-next-line
-	}, [settingSoc]);
 
 	useEffect(() => {
 		if (!localStorage.getItem('adminInfo')) {

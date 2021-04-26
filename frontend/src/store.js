@@ -7,6 +7,7 @@ import {
 	adminLoginReducer,
 } from './reducers/adminReducers';
 import { userListReducer } from './reducers/userReducers';
+import { ListReducer } from './reducers/listReducers';
 import { partnerListReducer } from './reducers/partnerReducers';
 
 const reducer = combineReducers({
@@ -15,6 +16,7 @@ const reducer = combineReducers({
 	adminList: adminListReducer,
 	partnerList: partnerListReducer,
 	userList: userListReducer,
+	List: ListReducer,
 });
 
 const initialState = {};

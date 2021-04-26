@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import '../styles/paginate.scss';
 
+
 const Paginate = ({ pages = 1, page = 1, listType }) => {
 	const history = useHistory();
 	return (

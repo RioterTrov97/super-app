@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -7,8 +7,7 @@ import '../styles/adminListScreen.scss';
 import { listPartners } from '../actions/partnerActions';
 import Paginate from '../components/Paginate';
 
-const PartnerListScreen = ({ socket, setupSoc }) => {
-	const [settingSoc, setSettingSoc] = useState(false);
+const PartnerListScreen = () => {
 	const history = useHistory();
 
 	const dispatch = useDispatch();
@@ -18,35 +17,12 @@ const PartnerListScreen = ({ socket, setupSoc }) => {
 	console.log(partners);
 
 	useEffect(() => {
-		console.log('hey');
-		if (socket) {
-			console.log('socket is here');
-			socket.emit('joinRoom', 'partnerListRoom');
-		} else {
-			console.log('setting up socket again');
-			setSettingSoc(!settingSoc);
-			setupSoc();
-		}
-
-		// eslint-disable-next-line
-	}, [settingSoc]);
-
-	useEffect(() => {
 		if (!localStorage.getItem('adminInfo')) {
 			history.push('/login');
 			return;
 		}
 		dispatch(listPartners());
 	}, [dispatch, history]);
-
-	const sendCallData = (e, phoneNumber) => {
-		e.preventDefault();
-		if (socket) {
-			socket.emit('call', 'partnerListRoom', phoneNumber);
-		} else {
-			console.log('no socket');
-		}
-	};
 
 	return (
 		<div className="adminListScreen">
@@ -76,14 +52,7 @@ const PartnerListScreen = ({ socket, setupSoc }) => {
 									<td>{partner?._id}</td>
 									<td>{partner?.name}</td>
 									<td>{partner?.phoneNumber}</td>
-									<td
-										className="adminListScreen__AdminLink"
-										onClick={(e) =>
-											sendCallData(
-												e,
-												partner?.phoneNumber
-											)
-										}>
+									<td className="adminListScreen__AdminLink">
 										Call
 									</td>
 								</tr>
