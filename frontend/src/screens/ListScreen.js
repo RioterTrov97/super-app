@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Message from '../components/InlineMessage';
 import '../styles/adminListScreen.scss';
@@ -8,8 +8,7 @@ import { list } from '../actions/listActions';
 import Paginate from '../components/Paginate';
 
 const ListScreen = ({ socket, setupSoc, match }) => {
-
-	const pageNumber = match.params.pageNumber||1
+	const { pageNumber } = useParams();
 
 	const [settingSoc, setSettingSoc] = useState(false);
 	const history = useHistory();
@@ -42,7 +41,7 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 			return;
 		}
 		dispatch(list(pageNumber));
-	}, [dispatch, history,pageNumber]);
+	}, [dispatch, history, pageNumber]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();
@@ -84,10 +83,7 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 									<td
 										className="adminListScreen__AdminLink"
 										onClick={(e) =>
-											sendCallData(
-												e,
-												list?.phoneNumber
-											)
+											sendCallData(e, list?.phoneNumber)
 										}>
 										Call
 									</td>

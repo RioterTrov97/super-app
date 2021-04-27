@@ -19,6 +19,7 @@ const storage = multer.diskStorage({
 });
 
 function checkFileType(file, cb) {
+	console.log('hello');
 	const filetypes = /csv/;
 	const extname = filetypes.test(
 		path.extname(file.originalname).toLowerCase()

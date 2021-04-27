@@ -1,32 +1,32 @@
-import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import '../styles/SearchBox.scss';
 
-const SearchBox = ({ history }) => {
-  const [keyword, setKeyword] = useState('')
+const SearchBox = ({ type }) => {
+	const history = useHistory();
+	const [keyword, setKeyword] = useState('');
 
-  const submitHandler = (e) => {
-    e.preventDefault()
-    if (keyword.trim()) {
-      history.push(`/search/${keyword}`)
-    } else {
-      console.log('Phone Number is not found')
-    }
-  }
+	const submitHandler = (e) => {
+		e.preventDefault();
+		if (keyword.trim()) {
+			history.push(`/${type}/${keyword}/1`);
+		} else {
+			console.log('Phone Number is not found');
+		}
+	};
 
-  return (
-    <Form onSubmit={submitHandler} inline>
-      <Form.Control
-        type='text'
-        name='q'
-        onChange={(e) => setKeyword(e.target.value)}
-        placeholder='Search PhoneNumber...'
-        className='mr-sm-2 ml-sm-5'
-      ></Form.Control>
-      <Button type='submit' variant='outline-success' className='p-2'>
-        Search
-      </Button>
-    </Form>
-  )
-}
+	return (
+		<div className="SearchBox">
+			<input
+				className="SearchBox__input"
+				value={keyword}
+				onChange={(e) => setKeyword(e.target.value)}
+			/>
+			<i
+				className="SearchBox__search fas fa-search"
+				onClick={submitHandler}></i>
+		</div>
+	);
+};
 
-export default SearchBox 
+export default SearchBox;

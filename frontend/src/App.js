@@ -12,7 +12,7 @@ import './App.css';
 import PartnerListScreen from './screens/PartnerListScreen';
 import UserListScreen from './screens/UserListScreen';
 import CreateAdminScreen from './screens/CreateAdminScreen';
-import csvUploadScreen from './screens/csvUploadScreen';
+import CsvUploadScreen from './screens/csvUploadScreen';
 import { io } from 'socket.io-client';
 import ListScreen from './screens/ListScreen';
 
@@ -67,7 +67,7 @@ const App = () => {
 								<Route
 									exact
 									path="/uploadcsv"
-									component={csvUploadScreen}
+									component={CsvUploadScreen}
 								/>
 								<Route
 									exact
@@ -109,12 +109,17 @@ const App = () => {
 										/>
 									)}
 								/>
-								{/* <Route exact path="/search/:keyword" component={ListScreen}/>
-								<Route exact path="/search/:keyword" component={PartnerListScreen}/>
-								<Route exact path="/search/:keyword" component={UserListScreen}/> */}
 
-								<Route exact path="/page/:pageNumber" component={UserListScreen} />
-								<Route exact path="/page/:pageNumber" component={ListScreen} />
+								<Route
+									exact
+									path="/partnerlist/:keyword/:pageNumber"
+									render={() => (
+										<PartnerListScreen
+											setupSoc={setupSocket}
+											socket={socket}
+										/>
+									)}
+								/>
 								<Route exact path="/" component={HomeScreen} />
 							</>
 						) : (

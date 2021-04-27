@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Message from '../components/InlineMessage';
 import '../styles/adminListScreen.scss';
 import { listUsers } from '../actions/userActions';
 import Paginate from '../components/Paginate';
+import SearchBox from '../components/SearchBox';
 
-const UserListScreen = ({ socket, setupSoc, match }) => {
-	const pageNumber = match.params.pageNumber||1
+const UserListScreen = ({ socket, setupSoc }) => {
+	const { keyword } = useParams();
 	const history = useHistory();
 	const [settingSoc, setSettingSoc] = useState(false);
 
@@ -17,7 +18,6 @@ const UserListScreen = ({ socket, setupSoc, match }) => {
 	const { loading, error, users } = userList;
 
 	console.log(users);
-
 
 	useEffect(() => {
 		if (socket) {
@@ -39,8 +39,8 @@ const UserListScreen = ({ socket, setupSoc, match }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(listUsers(pageNumber));
-	}, [dispatch, history,pageNumber]);
+		dispatch(listUsers(keyword));
+	}, [dispatch, history, keyword]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();
@@ -58,6 +58,7 @@ const UserListScreen = ({ socket, setupSoc, match }) => {
 					className="fas fa-arrow-circle-left"
 					onClick={() => history.push('/')}></i>
 				<p className="adminListScreen__title">User List</p>
+				<SearchBox type="userlist" />
 			</div>
 			{error ? <Message message={error} color="red" /> : null}
 			{loading ? (

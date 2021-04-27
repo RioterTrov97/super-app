@@ -1,0 +1,34 @@
+.SearchBox {
+	display: flex;
+	margin-left: auto;
+	position: relative;
+	height: 36px;
+
+	&__input {
+		border: none;
+		background: rgb(218, 218, 218);
+		height: 100%;
+		border-radius: 20px;
+		padding-right: 30px;
+		padding-left: 20px;
+		outline: none;
+		font-size: 16px;
+	}
+
+	&__input:focus {
+		background: rgb(255, 228, 228);
+	}
+
+	&__search {
+		position: absolute;
+		right: 10px;
+		align-self: center;
+		color: rgb(95, 95, 95);
+		font-size: 18px;
+		cursor: pointer;
+	}
+
+	&__search:hover {
+		color: red;
+	}
+}

@@ -6,7 +6,7 @@ import {
 } from '../constants/csvConstants';
 import { logout } from './adminActions';
 
-export const uploadFileHandler = (file, type) => async (dispatch) => {
+export const uploadFile = (file, type) => async (dispatch) => {
 	try {
 		dispatch({
 			type: CSV_UPLOAD_REQUEST,
@@ -19,7 +19,7 @@ export const uploadFileHandler = (file, type) => async (dispatch) => {
 				'Content-Type': 'multipart/form-data',
 			},
 		};
-
+		console.log(formData);
 		const { data } = await axios.post(
 			`/api/upload/${type}`,
 			formData,

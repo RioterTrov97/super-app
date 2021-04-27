@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import LoadingSpinner from '../components/LoadingSpinner';
 import Message from '../components/InlineMessage';
 import '../styles/adminListScreen.scss';
 import { listPartners } from '../actions/partnerActions';
 import Paginate from '../components/Paginate';
+import SearchBox from '../components/SearchBox';
 
-const PartnerListScreen = ({ socket, setupSoc, match }) => {
-	const keyword = match.params.keyword
+const PartnerListScreen = ({ socket, setupSoc }) => {
+	const { keyword } = useParams();
+	console.log('keyword: ', keyword);
 	const [settingSoc, setSettingSoc] = useState(false);
 	const history = useHistory();
 
@@ -57,8 +59,15 @@ const PartnerListScreen = ({ socket, setupSoc, match }) => {
 					className="fas fa-arrow-circle-left"
 					onClick={() => history.push('/')}></i>
 				<p className="adminListScreen__title">Partner List</p>
+				<SearchBox type="partnerlist" />
 			</div>
 			{error ? <Message message={error} color="red" /> : null}
+			{keyword ? (
+				<Message
+					message={`Search results for "${keyword}"`}
+					color="green"
+				/>
+			) : null}
 			{loading ? (
 				<LoadingSpinner />
 			) : (
