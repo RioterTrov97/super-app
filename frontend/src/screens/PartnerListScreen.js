@@ -7,7 +7,8 @@ import '../styles/adminListScreen.scss';
 import { listPartners } from '../actions/partnerActions';
 import Paginate from '../components/Paginate';
 
-const PartnerListScreen = ({ socket, setupSoc }) => {
+const PartnerListScreen = ({ socket, setupSoc, match }) => {
+	const keyword = match.params.keyword
 	const [settingSoc, setSettingSoc] = useState(false);
 	const history = useHistory();
 
@@ -37,8 +38,8 @@ const PartnerListScreen = ({ socket, setupSoc }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(listPartners());
-	}, [dispatch, history]);
+		dispatch(listPartners(keyword));
+	}, [dispatch, history, keyword]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();

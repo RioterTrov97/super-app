@@ -109,6 +109,12 @@ const App = () => {
 										/>
 									)}
 								/>
+								{/* <Route exact path="/search/:keyword" component={ListScreen}/>
+								<Route exact path="/search/:keyword" component={PartnerListScreen}/>
+								<Route exact path="/search/:keyword" component={UserListScreen}/> */}
+
+								<Route exact path="/page/:pageNumber" component={UserListScreen} />
+								<Route exact path="/page/:pageNumber" component={ListScreen} />
 								<Route exact path="/" component={HomeScreen} />
 							</>
 						) : (

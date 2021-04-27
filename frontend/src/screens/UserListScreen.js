@@ -7,7 +7,8 @@ import '../styles/adminListScreen.scss';
 import { listUsers } from '../actions/userActions';
 import Paginate from '../components/Paginate';
 
-const UserListScreen = ({ socket, setupSoc }) => {
+const UserListScreen = ({ socket, setupSoc, match }) => {
+	const pageNumber = match.params.pageNumber||1
 	const history = useHistory();
 	const [settingSoc, setSettingSoc] = useState(false);
 
@@ -16,6 +17,7 @@ const UserListScreen = ({ socket, setupSoc }) => {
 	const { loading, error, users } = userList;
 
 	console.log(users);
+
 
 	useEffect(() => {
 		if (socket) {
@@ -37,8 +39,8 @@ const UserListScreen = ({ socket, setupSoc }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(listUsers());
-	}, [dispatch, history]);
+		dispatch(listUsers(pageNumber));
+	}, [dispatch, history,pageNumber]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();

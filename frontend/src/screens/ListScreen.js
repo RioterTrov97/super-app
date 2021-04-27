@@ -7,7 +7,10 @@ import '../styles/adminListScreen.scss';
 import { list } from '../actions/listActions';
 import Paginate from '../components/Paginate';
 
-const ListScreen = ({ socket, setupSoc }) => {
+const ListScreen = ({ socket, setupSoc, match }) => {
+
+	const pageNumber = match.params.pageNumber||1
+
 	const [settingSoc, setSettingSoc] = useState(false);
 	const history = useHistory();
 
@@ -38,8 +41,8 @@ const ListScreen = ({ socket, setupSoc }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(list());
-	}, [dispatch, history]);
+		dispatch(list(pageNumber));
+	}, [dispatch, history,pageNumber]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();
@@ -76,14 +79,14 @@ const ListScreen = ({ socket, setupSoc }) => {
 							{lists?.lists?.map((list) => (
 								<tr key={list?._id}>
 									<td>{list?._id}</td>
-									<td>{list?.userName}</td>
-									<td>{list?.userPhoneNumber}</td>
+									<td>{list?.name}</td>
+									<td>{list?.phoneNumber}</td>
 									<td
 										className="adminListScreen__AdminLink"
 										onClick={(e) =>
 											sendCallData(
 												e,
-												list?.userPhoneNumber
+												list?.phoneNumber
 											)
 										}>
 										Call

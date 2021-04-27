@@ -9,6 +9,7 @@ import {
 import { userListReducer } from './reducers/userReducers';
 import { ListReducer } from './reducers/listReducers';
 import { partnerListReducer } from './reducers/partnerReducers';
+import { csvUploadReducer } from './reducers/csvReducers';
 
 const reducer = combineReducers({
 	adminLogin: adminLoginReducer,
@@ -17,6 +18,7 @@ const reducer = combineReducers({
 	partnerList: partnerListReducer,
 	userList: userListReducer,
 	List: ListReducer,
+	csvUpload:csvUploadReducer,
 });
 
 const initialState = {};

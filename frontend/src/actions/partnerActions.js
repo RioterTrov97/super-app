@@ -6,7 +6,7 @@ import {
 } from '../constants/partnerConstants';
 import { logout } from './adminActions';
 
-export const listPartners = () => async (dispatch, getState) => {
+export const listPartners = (keyword='') => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: PARTNER_LIST_REQUEST,
@@ -22,7 +22,7 @@ export const listPartners = () => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(`/api/partners`, config);
+		const { data } = await axios.get(`/api/partners?keyword=${keyword}`, config);
 
 		dispatch({
 			type: PARTNER_LIST_SUCCESS,

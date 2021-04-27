@@ -6,7 +6,7 @@ import {
 } from '../constants/listConstants';
 import { logout } from './adminActions';
 
-export const list = () => async (dispatch, getState) => {
+export const list = () => async (dispatch, getState, pageNumber='') => {
 	try {
 		dispatch({
 			type: LIST_REQUEST,
@@ -23,7 +23,7 @@ export const list = () => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(`/api/lists`, config);
+		const { data } = await axios.get(`/api/lists?pageNumber=${pageNumber}`, config);
 
 		dispatch({
 			type:LIST_SUCCESS,
