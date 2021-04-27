@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../utils/axios';
 import {
 	PARTNER_LIST_FAIL,
 	PARTNER_LIST_SUCCESS,
@@ -6,7 +6,7 @@ import {
 } from '../constants/partnerConstants';
 import { logout } from './adminActions';
 
-export const listPartners = (keyword='') => async (dispatch, getState) => {
+export const listPartners = (keyword = '') => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: PARTNER_LIST_REQUEST,
@@ -22,7 +22,10 @@ export const listPartners = (keyword='') => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(`/api/partners?keyword=${keyword}`, config);
+		const { data } = await axios.get(
+			`/api/partners?keyword=${keyword}`,
+			config
+		);
 
 		dispatch({
 			type: PARTNER_LIST_SUCCESS,

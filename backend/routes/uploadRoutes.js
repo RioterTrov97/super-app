@@ -19,14 +19,15 @@ const storage = multer.diskStorage({
 });
 
 function checkFileType(file, cb) {
-	console.log('hello');
-	const filetypes = /csv/;
+	console.log(file);
+	const filetypes = /csv|vnd.ms-excel/;
 	const extname = filetypes.test(
 		path.extname(file.originalname).toLowerCase()
 	);
 	const mimetype = filetypes.test(file.mimetype);
 
 	if (extname && mimetype) {
+		console.log('hello again');
 		return cb(null, true);
 	} else {
 		cb('csv only!');

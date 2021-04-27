@@ -40,7 +40,7 @@ const App = () => {
 
 			newSocket.on('disconnect', () => {
 				setSocket(null);
-				setTimeout(setupSocket, 6000);
+				setTimeout(setupSocket, 10000);
 			});
 
 			newSocket.on('connect', () => {

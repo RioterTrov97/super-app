@@ -1,18 +1,17 @@
-import axios from 'axios';
+import axios from '../utils/axios';
 import {
-	LIST_FAIL, 
+	LIST_FAIL,
 	LIST_SUCCESS,
 	LIST_REQUEST,
 } from '../constants/listConstants';
 import { logout } from './adminActions';
 
-export const list = () => async (dispatch, getState, pageNumber='') => {
+export const list = () => async (dispatch, getState, pageNumber = '') => {
 	try {
 		dispatch({
 			type: LIST_REQUEST,
 		});
 
-		
 		const {
 			adminLogin: { adminInfo },
 		} = getState();
@@ -23,10 +22,13 @@ export const list = () => async (dispatch, getState, pageNumber='') => {
 			},
 		};
 
-		const { data } = await axios.get(`/api/lists?pageNumber=${pageNumber}`, config);
+		const { data } = await axios.get(
+			`/api/lists?pageNumber=${pageNumber}`,
+			config
+		);
 
 		dispatch({
-			type:LIST_SUCCESS,
+			type: LIST_SUCCESS,
 			payload: data,
 		});
 	} catch (error) {

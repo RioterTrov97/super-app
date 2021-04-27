@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../utils/axios';
 import {
 	CSV_UPLOAD_REQUEST,
 	CSV_UPLOAD_SUCCESS,

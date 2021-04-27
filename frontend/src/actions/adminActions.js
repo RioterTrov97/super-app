@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../utils/axios';
 import {
 	ADMIN_DETAILS_FAIL,
 	ADMIN_DETAILS_REQUEST,

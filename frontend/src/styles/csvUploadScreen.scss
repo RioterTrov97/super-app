@@ -1,11 +1,44 @@
 .csvUploadScreen {
-  min-width: 800px;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: white;
-  padding: 40px;
-  border-radius: 25px;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+	min-width: 800px;
+	max-width: 1200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	&__card {
+		background: white;
+		width: 70%;
+		margin: 20px 0;
+		box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+		padding: 25px 25px 0 25px;
+		border-radius: 25px;
+		display: flex;
+		flex-direction: column;
+
+		> label {
+			font-size: 24;
+			font-weight: 800;
+			margin-bottom: 20px;
+		}
+
+		> input {
+			border: none;
+			background: none;
+			margin-bottom: 20px;
+		}
+
+		> input::-webkit-file-upload-button {
+			color: white;
+			display: inline-block;
+			background: #2e2e2e;
+			border: none;
+			padding: 7px 15px;
+			font-weight: 700;
+			border-radius: 3px;
+			white-space: nowrap;
+			cursor: pointer;
+			font-size: 10pt;
+			margin-right: 10px;
+		}
+	}
 }
