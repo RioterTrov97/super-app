@@ -6,8 +6,10 @@ import Message from '../components/InlineMessage';
 import '../styles/adminListScreen.scss';
 import { list } from '../actions/listActions';
 import Paginate from '../components/Paginate';
+import SearchBox from '../components/SearchBox';
 
 const ListScreen = ({ socket, setupSoc, match }) => {
+	const { keyword } = useParams();
 	const { pageNumber } = useParams();
 
 	const [settingSoc, setSettingSoc] = useState(false);
@@ -16,7 +18,7 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 	const dispatch = useDispatch();
 
 	const List = useSelector((state) => state.List);
-	const { loading, error, lists } = List;
+	const { loading, error, lists,page, pages } = List;
 
 	console.log(lists);
 
@@ -40,8 +42,8 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(list(pageNumber));
-	}, [dispatch, history, pageNumber]);
+		dispatch(list(pageNumber,keyword));
+	}, [dispatch, history, pageNumber,keyword]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();
@@ -59,8 +61,9 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 					className="fas fa-arrow-circle-left"
 					onClick={() => history.push('/')}></i>
 				<p className="adminListScreen__title">List</p>
+				<SearchBox type="list"/>
 			</div>
-			{error ? <Message message={error} color="red" /> : null}
+			{error ? <Message message={`Search results for "${keyword}"`} color="red" /> : null}
 			{loading ? (
 				<LoadingSpinner />
 			) : (
@@ -94,6 +97,7 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 					<Paginate
 						pages={lists?.pages}
 						page={lists?.page}
+						keyword={keyword ?keyword : ''}
 						listType="list"
 					/>
 				</>
@@ -101,5 +105,6 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 		</div>
 	);
 };
+
 
 export default ListScreen;

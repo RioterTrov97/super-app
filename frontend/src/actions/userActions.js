@@ -6,7 +6,7 @@ import {
 } from '../constants/userConstants';
 import { logout } from './adminActions';
 
-export const listUsers = () => async (dispatch, getState) => {
+export const listUsers = (keyword = '',pageNumber='') => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: USER_LIST_REQUEST,
@@ -22,7 +22,10 @@ export const listUsers = () => async (dispatch, getState) => {
 			},
 		};
 
-		const { data } = await axios.get(`/api/users`, config);
+		const { data } = await axios.get(
+			`/api/users??keyword=${keyword}&pageNumber=${pageNumber}`,
+			 config);
+		
 
 		dispatch({
 			type: USER_LIST_SUCCESS,

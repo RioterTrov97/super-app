@@ -10,12 +10,13 @@ import SearchBox from '../components/SearchBox';
 
 const UserListScreen = ({ socket, setupSoc }) => {
 	const { keyword } = useParams();
+	const { pageNumber } = useParams();
 	const history = useHistory();
 	const [settingSoc, setSettingSoc] = useState(false);
 
 	const dispatch = useDispatch();
 	const userList = useSelector((state) => state.userList);
-	const { loading, error, users } = userList;
+	const { loading, error, users,page, pages } = userList;
 
 	console.log(users);
 
@@ -39,8 +40,8 @@ const UserListScreen = ({ socket, setupSoc }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(listUsers(keyword));
-	}, [dispatch, history, keyword]);
+		dispatch(listUsers(keyword,pageNumber));
+	}, [dispatch, history, keyword,pageNumber]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();
@@ -60,7 +61,7 @@ const UserListScreen = ({ socket, setupSoc }) => {
 				<p className="adminListScreen__title">User List</p>
 				<SearchBox type="userlist" />
 			</div>
-			{error ? <Message message={error} color="red" /> : null}
+			{error ? <Message message={`Search results for "${keyword}"`} color="red" /> : null}
 			{loading ? (
 				<LoadingSpinner />
 			) : (
@@ -94,12 +95,14 @@ const UserListScreen = ({ socket, setupSoc }) => {
 					<Paginate
 						pages={users?.pages}
 						page={users?.page}
-						listType="partnerlist"
+						listType="userlist"
+						keyword={keyword ? keyword : ''}
 					/>
 				</>
 			)}
 		</div>
 	);
 };
+
 
 export default UserListScreen;

@@ -6,7 +6,7 @@ import {
 } from '../constants/listConstants';
 import { logout } from './adminActions';
 
-export const list = () => async (dispatch, getState, pageNumber = '') => {
+export const list = (keyword='', pageNumber='') => async (dispatch, getState) => {
 	try {
 		dispatch({
 			type: LIST_REQUEST,
@@ -23,7 +23,7 @@ export const list = () => async (dispatch, getState, pageNumber = '') => {
 		};
 
 		const { data } = await axios.get(
-			`/api/lists?pageNumber=${pageNumber}`,
+			`/api/lists?keyword=${keyword}&pageNumber=${pageNumber}`,
 			config
 		);
 
