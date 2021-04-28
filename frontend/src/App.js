@@ -120,6 +120,17 @@ const App = () => {
 										/>
 									)}
 								/>
+
+								<Route
+									exact
+									path="/userlist/:keyword/:pageNumber"
+									render={() => (
+										<UserListScreen
+											setupSoc={setupSocket}
+											socket={socket}
+										/>
+									)}
+								/>
 								<Route exact path="/" component={HomeScreen} />
 							</>
 						) : (

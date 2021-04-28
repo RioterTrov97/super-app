@@ -9,14 +9,13 @@ import Paginate from '../components/Paginate';
 import SearchBox from '../components/SearchBox';
 
 const UserListScreen = ({ socket, setupSoc }) => {
-	const { keyword } = useParams();
-	const { pageNumber } = useParams();
+	const { keyword, pageNumber } = useParams();
 	const history = useHistory();
 	const [settingSoc, setSettingSoc] = useState(false);
 
 	const dispatch = useDispatch();
 	const userList = useSelector((state) => state.userList);
-	const { loading, error, users,page, pages } = userList;
+	const { loading, error, users } = userList;
 
 	console.log(users);
 
@@ -40,8 +39,8 @@ const UserListScreen = ({ socket, setupSoc }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(listUsers(keyword,pageNumber));
-	}, [dispatch, history, keyword,pageNumber]);
+		dispatch(listUsers(keyword, pageNumber));
+	}, [dispatch, history, keyword, pageNumber]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();
@@ -61,7 +60,12 @@ const UserListScreen = ({ socket, setupSoc }) => {
 				<p className="adminListScreen__title">User List</p>
 				<SearchBox type="userlist" />
 			</div>
-			{error ? <Message message={`Search results for "${keyword}"`} color="red" /> : null}
+			{error ? (
+				<Message
+					message={`Search results for "${keyword}"`}
+					color="red"
+				/>
+			) : null}
 			{loading ? (
 				<LoadingSpinner />
 			) : (
@@ -103,6 +107,5 @@ const UserListScreen = ({ socket, setupSoc }) => {
 		</div>
 	);
 };
-
 
 export default UserListScreen;
