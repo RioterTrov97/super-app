@@ -62,7 +62,7 @@ const App = () => {
 			<main className="contentContainer">
 				{!loading ? (
 					<>
-						{adminInfo ? (
+						{localStorage.getItem('adminInfo') ? (
 							<>
 								<Route
 									exact
@@ -81,7 +81,7 @@ const App = () => {
 								/>
 								<Route
 									exact
-									path="/partnerlist"
+									path="/partnerlist/:pageNumber"
 									render={() => (
 										<PartnerListScreen
 											setupSoc={setupSocket}
@@ -91,7 +91,7 @@ const App = () => {
 								/>
 								<Route
 									exact
-									path="/userlist"
+									path="/userlist/:pageNumber"
 									render={() => (
 										<UserListScreen
 											setupSoc={setupSocket}
@@ -101,7 +101,7 @@ const App = () => {
 								/>
 								<Route
 									exact
-									path="/list"
+									path="/list/:pageNumber"
 									render={() => (
 										<ListScreen
 											setupSoc={setupSocket}
@@ -112,7 +112,7 @@ const App = () => {
 
 								<Route
 									exact
-									path="/partnerlist/:keyword/:pageNumber"
+									path="/partnerlist/:pageNumber/:keyword"
 									render={() => (
 										<PartnerListScreen
 											setupSoc={setupSocket}
@@ -123,9 +123,20 @@ const App = () => {
 
 								<Route
 									exact
-									path="/userlist/:keyword/:pageNumber"
+									path="/userlist/:pageNumber/:keyword"
 									render={() => (
 										<UserListScreen
+											setupSoc={setupSocket}
+											socket={socket}
+										/>
+									)}
+								/>
+
+								<Route
+									exact
+									path="/list/:pageNumber/:keyword"
+									render={() => (
+										<ListScreen
 											setupSoc={setupSocket}
 											socket={socket}
 										/>

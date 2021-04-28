@@ -9,15 +9,14 @@ import Paginate from '../components/Paginate';
 import SearchBox from '../components/SearchBox';
 
 const PartnerListScreen = ({ socket, setupSoc }) => {
-	const { keyword } = useParams();
-	const { pageNumber } = useParams();
+	const { keyword, pageNumber } = useParams();
 	console.log('keyword: ', keyword);
 	const [settingSoc, setSettingSoc] = useState(false);
 	const history = useHistory();
 
 	const dispatch = useDispatch();
 	const partnerList = useSelector((state) => state.partnerList);
-	const { loading, error, partners,page,pages } = partnerList;
+	const { loading, error, partners } = partnerList;
 
 	console.log(partners);
 
@@ -41,8 +40,8 @@ const PartnerListScreen = ({ socket, setupSoc }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(listPartners(keyword,pageNumber));
-	}, [dispatch, history, keyword,pageNumber]);
+		dispatch(listPartners(keyword, pageNumber));
+	}, [dispatch, history, keyword, pageNumber]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();
@@ -106,13 +105,12 @@ const PartnerListScreen = ({ socket, setupSoc }) => {
 						pages={partners?.pages}
 						page={partners?.page}
 						listType="partnerlist"
-						keyword={keyword ? keyword : ''}
+						keyword={keyword}
 					/>
 				</>
 			)}
 		</div>
 	);
 };
-
 
 export default PartnerListScreen;

@@ -2,8 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import '../styles/paginate.scss';
 
-
-const Paginate = ({ pages = 1, page = 1, listType }) => {
+const Paginate = ({ pages = 1, page = 1, listType, keyword = '' }) => {
 	const history = useHistory();
 	return (
 		pages > 1 && (
@@ -16,9 +15,14 @@ const Paginate = ({ pages = 1, page = 1, listType }) => {
 								: 'pagination__page'
 						}
 						key={x + 1}
-						onClick={() =>
-							history.push(`/${listType}/page/${x + 1}`)
-						}>
+						onClick={() => {
+							console.log('keyword and page: ', keyword, x + 1);
+							history.push(
+								`/${listType}/${x + 1}${
+									keyword ? '/' + keyword : keyword
+								}`
+							);
+						}}>
 						<p>{x + 1}</p>
 					</div>
 				))}

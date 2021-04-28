@@ -48,21 +48,21 @@ const HomeScreen = () => {
 					listPic={riderImg}
 					listTitle="Partner List"
 					listDesc="This page has details of all the partners of the site. Please follow company policy for any actions."
-					listLink="/partnerlist"
+					listLink="/partnerlist/1"
 				/>
 
 				<HomeCard
 					listPic={userImg}
 					listTitle="User List"
 					listDesc="This page has details of all the users of the site. Please follow company policy for any actions."
-					listLink="/userlist"
+					listLink="/userlist/1"
 				/>
 
 				<HomeCard
 					listPic={listImg}
 					listTitle="User & Partner List"
 					listDesc="This page has list of partners and users of the site. Please follow company policy for any actions."
-					listLink="/list"
+					listLink="/list/1"
 				/>
 
 				<HomeCard

@@ -9,7 +9,7 @@ const SearchBox = ({ type }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (keyword.trim()) {
-			history.push(`/${type}/${keyword}/1`);
+			history.push(`/${type}/1/${keyword}`);
 		} else {
 			console.log('Phone Number is not found');
 		}

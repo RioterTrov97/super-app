@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
-import LoadingSpinner from '../components/LoadingSpinner';
-import Message from '../components/InlineMessage';
 import '../styles/csvUploadScreen.scss';
 import { uploadFile } from '../actions/csvActions';
 import InlineSpinner from '../components/InlineSpinner';
-import axios from 'axios';
 import InlineMessage from '../components/InlineMessage';
 
 const CsvUploadScreen = () => {
@@ -67,6 +63,12 @@ const CsvUploadScreen = () => {
 			</div>
 
 			<div className="csvUploadScreen__status">
+				{error ? (
+					<InlineMessage
+						message={`Your ${csvResult.type} file could not be uploaded`}
+						color="red"
+					/>
+				) : null}
 				{successMessage && csvResult?.type === 'partner' ? (
 					<InlineMessage
 						message={`Your ${csvResult.type} file has been uploaded`}

@@ -20,6 +20,7 @@ const getPartnerById = asyncHandler(async (req, res) => {
 const getPartner = asyncHandler(async (req, res) => {
 	const pageSize = Number(req.query.pageSize) || 20;
 	const page = Number(req.query.pageNumber) || 1;
+	console.log('keyword n page: ', req.query.keyword, page);
 
 	const keyword = req.query.keyword
 		? {

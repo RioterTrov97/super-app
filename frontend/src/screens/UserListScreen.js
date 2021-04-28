@@ -10,6 +10,8 @@ import SearchBox from '../components/SearchBox';
 
 const UserListScreen = ({ socket, setupSoc }) => {
 	const { keyword, pageNumber } = useParams();
+
+	console.log(keyword, pageNumber);
 	const history = useHistory();
 	const [settingSoc, setSettingSoc] = useState(false);
 
@@ -64,6 +66,12 @@ const UserListScreen = ({ socket, setupSoc }) => {
 				<Message
 					message={`Search results for "${keyword}"`}
 					color="red"
+				/>
+			) : null}
+			{keyword ? (
+				<Message
+					message={`Search results for "${keyword}"`}
+					color="green"
 				/>
 			) : null}
 			{loading ? (

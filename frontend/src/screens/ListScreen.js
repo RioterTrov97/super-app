@@ -8,9 +8,10 @@ import { list } from '../actions/listActions';
 import Paginate from '../components/Paginate';
 import SearchBox from '../components/SearchBox';
 
-const ListScreen = ({ socket, setupSoc, match }) => {
-	const { keyword } = useParams();
-	const { pageNumber } = useParams();
+const ListScreen = ({ socket, setupSoc }) => {
+	const { keyword, pageNumber } = useParams();
+
+	console.log('keyword n Num: ', keyword, pageNumber);
 
 	const [settingSoc, setSettingSoc] = useState(false);
 	const history = useHistory();
@@ -18,7 +19,7 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 	const dispatch = useDispatch();
 
 	const List = useSelector((state) => state.List);
-	const { loading, error, lists,page, pages } = List;
+	const { loading, error, lists } = List;
 
 	console.log(lists);
 
@@ -42,8 +43,8 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 			history.push('/login');
 			return;
 		}
-		dispatch(list(pageNumber,keyword));
-	}, [dispatch, history, pageNumber,keyword]);
+		dispatch(list(keyword, pageNumber));
+	}, [dispatch, history, pageNumber, keyword]);
 
 	const sendCallData = (e, phoneNumber) => {
 		e.preventDefault();
@@ -61,9 +62,20 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 					className="fas fa-arrow-circle-left"
 					onClick={() => history.push('/')}></i>
 				<p className="adminListScreen__title">List</p>
-				<SearchBox type="list"/>
+				<SearchBox type="list" />
 			</div>
-			{error ? <Message message={`Search results for "${keyword}"`} color="red" /> : null}
+			{error ? (
+				<Message
+					message={`Search results for "${keyword}"`}
+					color="red"
+				/>
+			) : null}
+			{keyword ? (
+				<Message
+					message={`Search results for "${keyword}"`}
+					color="green"
+				/>
+			) : null}
 			{loading ? (
 				<LoadingSpinner />
 			) : (
@@ -97,7 +109,7 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 					<Paginate
 						pages={lists?.pages}
 						page={lists?.page}
-						keyword={keyword ?keyword : ''}
+						keyword={keyword ? keyword : ''}
 						listType="list"
 					/>
 				</>
@@ -105,6 +117,5 @@ const ListScreen = ({ socket, setupSoc, match }) => {
 		</div>
 	);
 };
-
 
 export default ListScreen;

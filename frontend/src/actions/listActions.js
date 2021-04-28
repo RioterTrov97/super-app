@@ -6,7 +6,10 @@ import {
 } from '../constants/listConstants';
 import { logout } from './adminActions';
 
-export const list = (keyword='', pageNumber='') => async (dispatch, getState) => {
+export const list = (keyword = '', pageNumber = '') => async (
+	dispatch,
+	getState
+) => {
 	try {
 		dispatch({
 			type: LIST_REQUEST,

@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
 			trim: true,
 		},
 		phoneNumber: {
-			type: Number,
+			type: String,
 			required: true,
 			trim: true,
 		},
@@ -16,6 +16,6 @@ const UserSchema = new mongoose.Schema(
 	{ timestamp: true }
 );
 
-const User = mongoose.model.User || mongoose.model('User', UserSchema);
+const User = mongoose.models.User || mongoose.model('User', UserSchema);
 
 export default User;
