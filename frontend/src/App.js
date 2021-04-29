@@ -62,92 +62,88 @@ const App = () => {
 			<main className="contentContainer">
 				{!loading ? (
 					<>
-						{localStorage.getItem('adminInfo') ? (
-							<>
-								<Route
-									exact
-									path="/uploadcsv"
-									component={CsvUploadScreen}
-								/>
-								<Route
-									exact
-									path="/adminlist"
-									component={AdminListScreen}
-								/>
-								<Route
-									exact
-									path="/createadmin"
-									component={CreateAdminScreen}
-								/>
-								<Route
-									exact
-									path="/partnerlist/:pageNumber"
-									render={() => (
-										<PartnerListScreen
-											setupSoc={setupSocket}
-											socket={socket}
-										/>
-									)}
-								/>
-								<Route
-									exact
-									path="/userlist/:pageNumber"
-									render={() => (
-										<UserListScreen
-											setupSoc={setupSocket}
-											socket={socket}
-										/>
-									)}
-								/>
-								<Route
-									exact
-									path="/list/:pageNumber"
-									render={() => (
-										<ListScreen
-											setupSoc={setupSocket}
-											socket={socket}
-										/>
-									)}
-								/>
-
-								<Route
-									exact
-									path="/partnerlist/:pageNumber/:keyword"
-									render={() => (
-										<PartnerListScreen
-											setupSoc={setupSocket}
-											socket={socket}
-										/>
-									)}
-								/>
-
-								<Route
-									exact
-									path="/userlist/:pageNumber/:keyword"
-									render={() => (
-										<UserListScreen
-											setupSoc={setupSocket}
-											socket={socket}
-										/>
-									)}
-								/>
-
-								<Route
-									exact
-									path="/list/:pageNumber/:keyword"
-									render={() => (
-										<ListScreen
-											setupSoc={setupSocket}
-											socket={socket}
-										/>
-									)}
-								/>
-								<Route exact path="/" component={HomeScreen} />
-							</>
-						) : (
+						{localStorage.getItem('adminInfo') ? null : (
 							<Redirect to="/login" />
 						)}
+						<Route
+							exact
+							path="/uploadcsv"
+							component={CsvUploadScreen}
+						/>
+						<Route
+							exact
+							path="/adminlist"
+							component={AdminListScreen}
+						/>
+						<Route
+							exact
+							path="/createadmin"
+							component={CreateAdminScreen}
+						/>
+						<Route
+							exact
+							path="/partnerlist/:pageNumber"
+							render={() => (
+								<PartnerListScreen
+									setupSoc={setupSocket}
+									socket={socket}
+								/>
+							)}
+						/>
+						<Route
+							exact
+							path="/userlist/:pageNumber"
+							render={() => (
+								<UserListScreen
+									setupSoc={setupSocket}
+									socket={socket}
+								/>
+							)}
+						/>
+						<Route
+							exact
+							path="/list/:pageNumber"
+							render={() => (
+								<ListScreen
+									setupSoc={setupSocket}
+									socket={socket}
+								/>
+							)}
+						/>
 
+						<Route
+							exact
+							path="/partnerlist/:pageNumber/:keyword"
+							render={() => (
+								<PartnerListScreen
+									setupSoc={setupSocket}
+									socket={socket}
+								/>
+							)}
+						/>
+
+						<Route
+							exact
+							path="/userlist/:pageNumber/:keyword"
+							render={() => (
+								<UserListScreen
+									setupSoc={setupSocket}
+									socket={socket}
+								/>
+							)}
+						/>
+
+						<Route
+							exact
+							path="/list/:pageNumber/:keyword"
+							render={() => (
+								<ListScreen
+									setupSoc={setupSocket}
+									socket={socket}
+								/>
+							)}
+						/>
+						<Route exact path="/" component={HomeScreen} />
 						<Route exact path="/login" component={LoginScreen} />
 					</>
 				) : (
